@@ -4,6 +4,7 @@
 简化了操作步骤
 
 若文件夹结构如图
+```
 d:
 --danmaku2ass.py
 --danmaku2ass.exe
@@ -11,6 +12,7 @@ d:
   |--a.xml
   |--\xmlwenjian
      |123xml4.xml
+```
 
 在命令行中运行
 ```
@@ -25,6 +27,9 @@ python d:\danmaku2ass.py d:\xml文件\a.xml
 则只转换这一个文件并保存在与xml同目录下
 
 对于没有安装python的人提供了exe
+
+https://zhiyuyu.lanzous.com/b099c16kd  
+密码:5z1n
 
 在命令行中运行
 ```
