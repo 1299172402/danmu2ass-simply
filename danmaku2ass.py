@@ -16,6 +16,7 @@ import re
 import sys
 import time
 import xml.dom.minidom
+import platform
 
 
 if sys.version_info < (3,):
@@ -721,14 +722,19 @@ def export(func):
         __all__ = [func.__name__]
     return func
 
+
 def get_file(root_path, all_files=[]):
-        files = os.listdir(root_path)
-        for file in files:
-            if not os.path.isdir(root_path + '\\' + file):
-               all_files.append(root_path + '\\' + file)
-            else:
-              get_file((root_path + '\\' + file), all_files)
-        return all_files
+    delimiter = '/'
+    if platform.system() == "Windows":
+        delimiter = '\\'
+
+    files = os.listdir(root_path)
+    for file in files:
+        if not os.path.isdir(root_path + delimiter + file):
+            all_files.append(root_path + delimiter + file)
+        else:
+            get_file((root_path + delimiter + file), all_files)
+    return all_files
 
 @export
 def Danmaku2ASS(input_files, input_format, output_file, stage_width, stage_height, reserve_blank=0, font_face=_('(FONT) sans-serif')[7:], font_size=25.0, text_opacity=1.0, duration_marquee=5.0, duration_still=5.0, comment_filter=None, comment_filters_file=None, is_reduce_comments=False, progress_callback=None):
