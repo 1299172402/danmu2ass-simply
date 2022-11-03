@@ -723,17 +723,12 @@ def export(func):
     return func
 
 
-def get_file(root_path, all_files=[]):
-    delimiter = '/'
-    if platform.system() == "Windows":
-        delimiter = '\\'
-
-    files = os.listdir(root_path)
-    for file in files:
-        if not os.path.isdir(root_path + delimiter + file):
-            all_files.append(root_path + delimiter + file)
-        else:
-            get_file((root_path + delimiter + file), all_files)
+def get_file(root_path, all_files:list=None):
+    if all_files is None:
+        all_files = []
+    for t,ds,fs in os.walk(root_path):
+        for f in fs:
+            all_files.append(os.path.join(t,f))
     return all_files
 
 @export
